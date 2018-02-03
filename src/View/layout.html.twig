@@ -11,16 +11,8 @@
 
   </head>
   <body>
+  {% include "nav_home.html.twig" %}
 
-{% if   app.session.get('droits') is defined and  app.session.get('droits') == 'ROLE_ADMIN' %}
-  {% include "nav_backOff.html.twig" %}
-{% elseif   app.session.get('droits') is defined and  app.session.get('droits') == 'ROLE_CLIENT' %}
-  {% include "nav_frontClientOff.html.twig" %}
-{% elseif  app.session.get('droits') is defined and  app.session.get('droits') == 'ROLE_VENDEUR'%}
-  {% include "nav_frontVendeurOff.html.twig" %}
-    {% else %}
-    {% include "nav_home.html.twig" %}
-{% endif%}
 
 {% block contenu %}
     <main role="main" class="container">

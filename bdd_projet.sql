@@ -64,6 +64,7 @@ CREATE TABLE Utilisateur(
 	nom_utilisateur varchar(255),
 	prenom_utilisateur varchar(255),
 	adresse_utilisateur varchar(255),
+	adresseMail_utilisateur VARCHAR(255),
 	password_utilisateur varchar(255),
 	ville varchar(255),
 	droit varchar(255),
@@ -71,13 +72,15 @@ CREATE TABLE Utilisateur(
 	PRIMARY KEY (id_utilisateur),
 	CONSTRAINT fk_Entreprise_Utilisateur FOREIGN KEY (id_entreprise) REFERENCES Entreprise(id_entreprise)
 )DEFAULT CHARSET=utf8;
+
 /*
-algo de cryptga md5 et mot de passe de 1 : client et du 2 :vendeur
+algo de cryptga md5 et mot de passe de 1 : client et du 2 :vendeur , mot de passe de 3:admin
  */
-INSERT INTO Utilisateur (id_utilisateur, sexe_utilisateur,nom_utilisateur, prenom_utilisateur,adresse_utilisateur,password_utilisateur,ville,droit,id_entreprise)
+INSERT INTO Utilisateur (id_utilisateur, sexe_utilisateur,nom_utilisateur, prenom_utilisateur,adresse_utilisateur,adresseMail_utilisateur,password_utilisateur,ville,droit,id_entreprise)
  VALUES
- ( 1,'Homme','Sanchez','Pedro','2 rue chikita','62608e08adc29a8d6dbc9754e659f125','Mexico','Droit_Client',1),
- (2 ,'Femme','Irina','Domohov','5 rue de moscou','34fdd771c0b05faaf5f16b3b0ea12702','Moscva','Droit_Vendeur',2);
+ ( 1,'Homme','Sanchez','Pedro','2 rue chikita','pedro@gmail.com','62608e08adc29a8d6dbc9754e659f125','Mexico','Droit_Client',1),
+ ( 3,'','admin','admin','','admin@gmail.com','21232f297a57a5a743894a0e4a801fc3','','Droit_Admin',0),
+ ( 2 ,'Femme','Irina','Domohov','5 rue de moscou','irina@gmail.com','34fdd771c0b05faaf5f16b3b0ea12702','Moscva','Droit_Vendeur',2);
 
 CREATE TABLE Dates(
 	id_date int,

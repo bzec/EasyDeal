@@ -1,10 +1,10 @@
 
 {% extends "layout.html.twig" %}
 {% block contenu %}
-    <form method="post" action="{{ path('compte.validFormlogin') }}">
+    <form method="post" action="{{ path('user.validFormlogin') }}">
             <div class="form-group">
                 <div class="col-md-3 mb-4">
-                    <label >Login :</label>
+                    <label >Adresse Mail :</label>
                     <input name="login"  type="text" value="" class="form-control"  placeholder="Login"  required>
                 </div>
             </div>
