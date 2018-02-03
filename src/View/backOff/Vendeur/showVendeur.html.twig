@@ -1,0 +1,30 @@
+{% extends "layout.html.twig" %}
+{% block contenu %}
+	<div class="col-md-6 mb-2"></div>
+	<table class="table table-striped">
+		<thead class="thead-inverse">
+		<tr><th>nom utilisateur</th><th>id utilisateur</th><th>prenom utilisateur</th><th>code postal</th><th>num tel</th><th>id entreprise</th><th>username</th>
+            {% if   app.session.get('droits') is defined and  app.session.get('droits') == 'ROLE_ADMIN' %}
+				<th>opération</th>
+            {% endif %}
+		</tr>
+		</thead>
+		<tbody>
+        {% for vendeur in data if data is not empty %}
+
+			<tr>
+				<td>{{vendeur.nom_utilisateur}}</td><td>{{vendeur.id_utilisateur}}</td><td>{{vendeur.prenom_utilisateur}}</td><td>{{vendeur.numero_tel}}</td><td>
+                    {{vendeur.code_postal}}</td><td>{{vendeur.id_entreprise}}</td><td>{{ vendeur.username }}</td>
+                {% if   app.session.get('droits') is defined and  app.session.get('droits') == 'ROLE_ADMIN' %}
+					<td>
+
+						<a href="{{ path('vendeur.delete', {id: vendeur.id_utilisateur}) }}">supprimer</a>
+					</td>
+                {% endif %}
+			</tr>
+        {% endfor %}
+		</tbody>
+	</table>
+	</div>
+{% endblock %}
+
