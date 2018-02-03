@@ -20,8 +20,7 @@ class ProduitController implements ControllerProviderInterface
 {
     private $produitModel;
     private $typeProduitModel;
-    private $compteModel;
-    private $panierModel;
+
 
     public function index(Application $app) {
         return $this->showProduits($app);
@@ -30,17 +29,14 @@ class ProduitController implements ControllerProviderInterface
     public function showProduits(Application $app) {
         $this->produitModel = new ProduitModel($app);
         $produits = $this->produitModel->getAllProduits();
-        return $app["twig"]->render('backOff/Produit/showProduits.html.twig',['data'=>$produits]);
+        return $app["twig"]->render('Admin/Produit/showProduits.html.twig',['data'=>$produits]);
     }
-
-
-
 
     public function addProduit(Application $app) {
         $this->typeProduitModel = new TypeProduitModel($app);
         $typeProduits = $this->typeProduitModel->getAllTypeProduits();
       //  dump($typeProduits);
-        return $app["twig"]->render('backOff/Produit/addProduit.html.twig',['typeProduits'=>$typeProduits]);
+        return $app["twig"]->render('Admin/Produit/addProduit.html.twig',['typeProduits'=>$typeProduits]);
     }
 
     public function validFormAddProduit(Application $app, Request $req) {
@@ -63,7 +59,7 @@ class ProduitController implements ControllerProviderInterface
             {
                 $this->typeProduitModel = new TypeProduitModel($app);
                 $typeProduits = $this->typeProduitModel->getAllTypeProduits();
-                return $app["twig"]->render('backOff/Produit/addProduit.html.twig',['donnees'=>$donnees,'erreurs'=>$erreurs,'typeProduits'=>$typeProduits]);
+                return $app["twig"]->render('Admin/Produit/addProduit.html.twig',['donnees'=>$donnees,'erreurs'=>$erreurs,'typeProduits'=>$typeProduits]);
             }
             else
             {
@@ -76,12 +72,6 @@ class ProduitController implements ControllerProviderInterface
         else
             return $app->abort(404, 'error Pb data form Add');
     }
-
-
-
-
-
-
 
     public function connect(Application $app) {  //http://silex.sensiolabs.org/doc/providers.html#controller-providers
         $controllers = $app['controllers_factory'];

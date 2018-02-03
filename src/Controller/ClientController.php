@@ -24,9 +24,6 @@ class ClientController implements ControllerProviderInterface
     }
 
 
-
-
-
     public function connect(Application $app) {  //http://silex.sensiolabs.org/doc/providers.html#controller-providers
         $controllers = $app['controllers_factory'];
 
