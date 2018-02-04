@@ -1,0 +1,38 @@
+{% extends "layout.html.twig" %}
+{% block contenu %}
+
+    <div class="container">
+        <div class="">
+            <h4>Produit: </h4>
+
+
+
+                <div class="col-lg-6">
+
+                    <caption>{{produit.libelle_produits}}</caption>
+                    <table class="table table-striped">
+
+                        <tbody>
+
+                        <tr>
+
+                            <td> heure de fin :{{ produit.heure_fin_vente }}<br>
+                            prix :{{ produit.prix_produits }} <br>
+                            stockProduit : {{ produit.stockProduit }} <br>
+                            adresse : {{ produit.adresse_utilisateur }}</td>
+                            <td>
+                                <a href="">ajouter au panier</a> <br>
+                                <a href="{{path('produit.showProduitsC')}}"> retour</a>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+        </div >
+
+    </div>
+
+
+{% endblock %}

@@ -16,12 +16,13 @@
 
             <tr>
                  <td>{{ produit.libelle_typeProduits }}</td>
-                    <td>prix :{{ produit.prix_produits }}</td>
+                    <td>prix :{{ produit.prix_produits }}<br>
+                stock :{{ produit.stockProduit }}</td>
 
                     <td>
 
-                        <a href="{{ path('panier.add',{idProduit:produit.id_produits}) }}">ajouter au panier</a> <br>
-                        <a href="#"> détails sur le produit</a>
+                        <a href="#">ajouter au panier</a> <br>
+                        <a href="{{path('produit.detail', {idProduit: produit.id_produits})}}"> détails sur le produit</a>
                     </td>
             </tr>
 
@@ -31,36 +32,7 @@
             
         {% endfor %}
         </div >
-        <div class="">
-        <h4>Panier</h4>
-                {% for panier in panier if panier is not empty %}
 
-                
-
-                    <div class="col-lg-4">
-
-                            <caption>{{panier.libelle_produits}}</caption>
-                            <table class="table table-striped">
-                                <tbody>
-                                <tr>
-
-                                    <td>
-                                        prix :{{ panier.prix_panier }} <br>
-                                        Quantite :{{ panier.quantite_panier }} <br>
-                                        Date de fin de vente : {{ panier.heure_fin_vente|date('d/m/Y H:m:s' )}}
-                                    </td>
-                                    <td>
-                                        <a href="{{path('panier.deleteProduit', {id: panier.id_panier})}}">Suppression</a> <br>
-                                    </td>
-
-                                </tr>
-                                </tbody>
-                            </table>
-                       </div>
-                    
-
-                {% endfor %}
-            </div>
             </div>
       
 
