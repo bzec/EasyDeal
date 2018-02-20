@@ -13,19 +13,19 @@ class ProduitModel {
         $this->db = $app['db'];
     }
     // http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/query-builder.html#join-clauses
-    public function getAllProduits($idU) {
+    public function getAllProduits() {
 
         $queryBuilder = new QueryBuilder($this->db);
         $queryBuilder
             ->select('*')
             ->from('Produits', 'p')
-            ->where('p.id_utilisateur!= ?')
+
             ->innerJoin('p', 'TypeProduits', 't', 'p.id_typeProduits=t.id_typeProduits')
             ->innerJoin('p', 'Utilisateur', 'u', 'p.id_utilisateur=u.id_utilisateur')
             ->innerJoin('p', 'OrigineProduits', 'o', 'p.id_origineProduits=o.id_origineProduits')
             ->addOrderBy('p.id_produits','ASC')
-            ->addOrderBy('p.libelle_produits', 'ASC')
-            ->setParameter(0,$idU);
+            ->addOrderBy('p.libelle_produits', 'ASC');
+
         return $queryBuilder->execute()->fetchAll();
 
     }

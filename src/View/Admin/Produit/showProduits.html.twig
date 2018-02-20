@@ -1,30 +1,34 @@
 {% extends "layout.html.twig" %}
 {% block contenu %}
-	<div class="col-md-6 mb-2"></div>
-	<table class="table table-striped">
-		<thead class="thead-inverse">
-		<tr><th>nom</th><th>id produit</th><th>quantite</th><th>prix</th><th>type produit</th><th>heure debut</th><th>heure fin</th>
-            {% if   app.session.get('droits') is defined and  app.session.get('droits') == 'ROLE_ADMIN' %}
-				<th>opération</th>
-            {% endif %}
-		</tr>
-		</thead>
-		<tbody>
-        {% for produit in data if data is not empty %}
 
-			<tr>
-				<td>{{produit.libelle_produits}}</td><td>{{produit.id_produits}}</td><td>{{produit.quantite_produits}}</td><td>{{produit.prix_produits}}</td><td>
-                    {{produit.id_typeProduits}}</td><td>{{produit.heure_debut_vente}}</td><td>{{ produit.heure_fin_vente }}</td>
-                {% if   app.session.get('droits') is defined and  app.session.get('droits') == 'ROLE_ADMIN' %}
-					<td>
-						<a href="{{ path('produit.editProduit', {id: produit.id_produits}) }}">modifier</a>
-						<a href="{{ path('produit.deleteProduit', {id: produit.id_produits}) }}">supprimer</a>
-					</td>
-                {% endif %}
-			</tr>
-        {% endfor %}
-		</tbody>
-	</table>
+
+{% for produit in data if data is not empty %}
+
+<div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+	<div class="mdl-card__media">
+		<img src="images/banette.jpg">
 	</div>
+	<div class="mdl-card__title">
+		<h4 class="mdl-card__title-text">{{ produit.libelle_produits }}</h4>
+	</div>
+    <div class="mdl-card__supporting-text">
+        <span class="mdl-typography--font-light mdl-typography--subhead">prix du produit: {{ produit.prix_produits }} , vendeur: </span>
+    </div>
+    <div class="mdl-card__actions">
+        <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="">
+            Plus de détails
+            <i class="material-icons">chevron_right</i>
+        </a>
+    </div>
+    {% if   app.session.get('droits') is defined and  app.session.get('droits') == 'ROLE_ADMIN' %}
+
+	 <a href="{{ path('produit.editProduit', {id: produit.id_produits}) }}">modifier</a>
+	 <a href="{{ path('produit.deleteProduit', {id: produit.id_produits}) }}">supprimer</a>
+
+     {% endif %}
+
+     {% endfor %}
+    </div>
+
 {% endblock %}
 

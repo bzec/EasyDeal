@@ -1,16 +1,32 @@
 <!doctype html>
-<html lang="fr">
+
+<html lang="en">
   <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Introducing Lollipop, a sweet new take on Android.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Android</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EasyDeals</title>
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
-      <link rel="stylesheet" href="{{ asset('assets/css/starter-template.css') }}" />
-
+    <!-- Page styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}" />
+    <style>
+    #view-source {
+      position: fixed;
+      display: block;
+      right: 0;
+      bottom: 0;
+      margin-right: 40px;
+      margin-bottom: 40px;
+      z-index: 900;
+    }
+    </style>
   </head>
   <body>
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   {% include "nav_home.html.twig" %}
 
 
@@ -24,11 +40,58 @@
 
     </main><!-- /.container -->
 {% endblock %}
-<!-- Bootstrap core JavaScript
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-<script src="{{ asset('assets/js/bootstrap.js') }}"></script>
-  </body>
+  </div>
+</body>
+   <footer class="android-footer mdl-mega-footer">
+          <div class="mdl-mega-footer--top-section">
+            <div class="mdl-mega-footer--left-section">
+              <button class="mdl-mega-footer--social-btn"></button>
+              &nbsp;
+              <button class="mdl-mega-footer--social-btn"></button>
+              &nbsp;
+              <button class="mdl-mega-footer--social-btn"></button>
+            </div>
+            <div class="mdl-mega-footer--right-section">
+              <a class="mdl-typography--font-light" href="#top">
+                Back to Top
+                <i class="material-icons">expand_less</i>
+              </a>
+            </div>
+          </div>
+
+          <div class="mdl-mega-footer--middle-section">
+            <p class="mdl-typography--font-light">Satellite imagery: © 2014 Astrium, DigitalGlobe</p>
+            <p class="mdl-typography--font-light">Some features and devices may not be available in all areas</p>
+          </div>
+
+          <div class="mdl-mega-footer--bottom-section">
+            <a class="android-link android-link-menu mdl-typography--font-light" id="version-dropdown">
+              Versions
+              <i class="material-icons">arrow_drop_up</i>
+            </a>
+            <ul class="mdl-menu mdl-js-menu mdl-menu--top-left mdl-js-ripple-effect" for="version-dropdown">
+              <li class="mdl-menu__item">5.0 Lollipop</li>
+              <li class="mdl-menu__item">4.4 KitKat</li>
+              <li class="mdl-menu__item">4.3 Jelly Bean</li>
+              <li class="mdl-menu__item">Android History</li>
+            </ul>
+            <a class="android-link android-link-menu mdl-typography--font-light" id="developers-dropdown">
+              For Developers
+              <i class="material-icons">arrow_drop_up</i>
+            </a>
+            <ul class="mdl-menu mdl-js-menu mdl-menu--top-left mdl-js-ripple-effect" for="developers-dropdown">
+              <li class="mdl-menu__item">App developer resources</li>
+              <li class="mdl-menu__item">Android Open Source Project</li>
+              <li class="mdl-menu__item">Android SDK</li>
+              <li class="mdl-menu__item">Android for Work</li>
+            </ul>
+            <a class="android-link mdl-typography--font-light" href="">Blog</a>
+            <a class="android-link mdl-typography--font-light" href="">Privacy Policy</a>
+          </div>
+
+        </footer>
+      </div>
+    </div>
+        <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 </html>
 

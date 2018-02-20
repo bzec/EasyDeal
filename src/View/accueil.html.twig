@@ -1,14 +1,132 @@
 {% extends "layout.html.twig" %}
 {% block contenu %}
 
-	<main role="main" class="container">
+<div class="android-content mdl-layout__content">
+        <a name="top"></a>
+        <div class="android-be-together-section mdl-typography--text-center" style="background-image:url({{asset('images/pageAccueil.jpg')}}); background-size: cover; opacity: 0.9">
+          <div class="logo-font android-slogan">EasyDeals.</div>
+          <div class="logo-font android-sub-slogan">Vous êtes ici pour lutter contre le gaspillage ! Vous aurez la possibilité de
+            récupérer des produits qui sont proches de leur date d'expiriation à petit prix !
+            Alors n'hésitez plus et venez vite réserver vos produits sur EasyDeal dans nos boulangerie, boucherie et patisserie.
+          </div>
+        </div>
+        <div class="android-screen-section mdl-typography--text-center">
+          <a name="screens"></a>
+          <div class="mdl-typography--display-1-color-contrast">Faites votre choix !</div>
+          <div class="android-screens">
+            <div class="android-wear android-screen">
+              <a class="android-image-link" href="">
+                <img class="android-screen-image" src="{{asset('images/tous.jpg')}}" >
+              </a>
+              <a class="android-link mdl-typography--font-regular mdl-typography--text-uppercase" href="">Tous</a>
+            </div>
+            <div class="android-phone android-screen">
+              <a class="android-image-link" href="">
+                <img class="android-screen-image" src="{{asset('images/icone-restaurant.jpg')}}" >
+              </a>
+              <a class="android-link mdl-typography--font-regular mdl-typography--text-uppercase" href="">Restaurant</a>
+            </div>
+            <div class="android-tablet android-screen">
+              <a class="android-image-link" href="">
+                <img class="android-screen-image" src="{{asset('images/icone_boulangerie_l.png')}}" >
+              </a>
+              <a class="android-link mdl-typography--font-regular mdl-typography--text-uppercase" href="">Boulangerie</a>
+            </div>
+            <div class="android-tv android-screen">
+              <a class="android-image-link" href="">
+                <img class="android-screen-image" src="{{asset('images/patisserie.png')}}" >
+              </a>
+              <a class="android-link mdl-typography--font-regular mdl-typography--text-uppercase" href="">Pâtisserie</a>
+            </div>
+            <div class="android-auto android-screen">
+              <a class="android-image-link" href="">
+                <img class="android-screen-image" src="{{asset('images/commerce.png')}}" >
+              </a>
+              <a class="android-link mdl-typography--font-regular mdl-typography--text-uppercase mdl-typography--text-left" href="">Centre Commercial</a>
+            </div>
+          </div>
+        </div>
 
-		<div class="starter-template">
-			<h1> Bienvenue sur EasyDeals </h1>
+        <div class="android-customized-section"  style="margin-left: 20px;" >
+          <div class="android-customized-section-text" style="margin-left: 20px;">
+            <iframe src="https://www.google.com/maps/d/embed?mid=14HYiqfcnkTIeRcWoMKGO0kq_3ic8CCDh" width="1280" height="580"></iframe>
+          </div>
+        </div>
+        <div class="android-more-section">
+          <div class="android-section-title mdl-typography--display-1-color-contrast">Sponsor</div>
+          <div class="android-card-container mdl-grid">
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+                <img src="{{asset('images/lidl.png')}}">
+              </div>
+              <div class="mdl-card__title">
+                 <h4 class="mdl-card__title-text">LIDL</h4>
+              </div>
+              <div class="mdl-card__supporting-text">
+                <span class="mdl-typography--font-light mdl-typography--subhead">Le vrai prix des bonnes choses… Découvrez un grand choix de produits de qualité sélectionnés pour vous dans nos magasins partout en France.</span>
+              </div>
+              <div class="mdl-card__actions">
+                 <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="">
+                   Plus de détails
+                   <i class="material-icons">chevron_right</i>
+                 </a>
+              </div>
+            </div>
 
-		</div>
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+                <img src="{{asset('images/banette.jpg')}}">
+              </div>
+              <div class="mdl-card__title">
+                 <h4 class="mdl-card__title-text">Banette</h4>
+              </div>
+              <div class="mdl-card__supporting-text">
+                <span class="mdl-typography--font-light mdl-typography--subhead">Depuis plus de 25 ans, Banette défend et valorise le savoir-faire artisanal des boulangers et le pain d'exception.</span>
+              </div>
+              <div class="mdl-card__actions">
+                 <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="">
+                   Plus de détails
+                   <i class="material-icons">chevron_right</i>
+                 </a>
+              </div>
+            </div>
 
-	</main><!-- /.container -->
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+                <img src="{{asset('images/magasin-leclerc.png')}}">
 
+              </div>
+              <div class="mdl-card__title">
+                 <h4 class="mdl-card__title-text">E-leclerc</h4>
+              </div>
+              <div class="mdl-card__supporting-text">
+                <span class="mdl-typography--font-light mdl-typography--subhead">Chez E. Leclerc vous savez que vous achetez moins cher</span>
+              </div>
+              <div class="mdl-card__actions">
+                 <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="">
+                   Plus de détails
+                   <i class="material-icons">chevron_right</i>
+                 </a>
+              </div>
+            </div>
+
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+                <img src="{{asset('images/cora.jpg')}}">
+              </div>
+              <div class="mdl-card__title">
+                 <h4 class="mdl-card__title-text">Cora</h4>
+              </div>
+              <div class="mdl-card__supporting-text">
+                <span class="mdl-typography--font-light mdl-typography--subhead">Comptez sur nous !</span>
+              </div>
+              <div class="mdl-card__actions">
+                 <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="">
+                   Plus de détails
+                   <i class="material-icons">chevron_right</i>
+                 </a>
+              </div>
+            </div>
+          </div>
 {% endblock %}
 

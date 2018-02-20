@@ -28,7 +28,7 @@ class ProduitController implements ControllerProviderInterface
 
     public function showProduitsC(Application $app) {
         $this->produitModel = new ProduitModel($app);
-        $produits = $this->produitModel->getAllProduits($app['session']->get('id_utilisateur'));
+        $produits = $this->produitModel->getAllProduits();
         //print_r($produits);
         return $app["twig"]->render('/Utilisateur/showProduitsClient.html.twig',['data'=>$produits]);
     }

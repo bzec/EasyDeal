@@ -1,76 +1,46 @@
-<nav class="navbar  navbar-expand-md navbar-dark fixed-top" style="background-color:#372F25;" >
-    <a class="navbar-brand" href="#">EasyDeals </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <span class="navbar-text">
 
-    </span>
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Produit</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="{{ path('produit.showProduitsC')  }}">Afficher les produits</a>
-                </div>
-            </li>
-            {% if app.session.get('logged') is defined and  app.session.get('logged') == 1  %}
+      <div class="android-header mdl-layout__header mdl-layout__header--waterfall">
+        <div class="mdl-layout__header-row">
+          <span class="android-title mdl-layout-title">
+            <img class="android-logo-image" src="images/android-logo.png">
+          </span>
+          <!-- Add spacer, to align navigation to the right in desktop -->
+          <div class="android-header-spacer mdl-layout-spacer"></div>
+          <div class="android-search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">
+            <label class="mdl-button mdl-js-button mdl-button--icon" for="search-field">
+              <i class="material-icons">search</i>
+            </label>
+            <div class="mdl-textfield__expandable-holder">
+              <input class="mdl-textfield__input" type="text" id="search-field">
+            </div>
+          </div>
+          <!-- Navigation -->
+          <div class="android-navigation-container">
+            <nav class="android-navigation mdl-navigation">
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="" id="dropdown0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Panier</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown0">
-                        <a class="dropdown-item" href="#">Afficher mon panier</a>
+              <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{{path('produit.showProduitsC')}}">Produits</a>
+                {% if   app.session.get('logged') is defined and  app.session.get('logged') != 1 %}
+                  <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{{  path('user.login') }}">Connexion</a>
+                  <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{{  path('user.login') }}">Inscription</a>
+                {% else %}
+                  <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Mon profil</a>
+                  <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{{  path('user.logout') }}">Deconnexion</a>
+                {% endif %}
 
-                    </div>
-                </li>
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Commande</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown02">
-                    <a class="dropdown-item" href="#">Afficher mes commandes</a>
 
-                </div>
-            </li>
-            {% endif %}
 
-            {% if app.session.get('logged') is defined and  app.session.get('logged') == 1 and app.session.get('droit') == 'Droit_Vendeur' %}
+                {% if app.session.get('logged') is defined and  app.session.get('logged') == 1 and app.session.get('droit') == 'Droit_Admin' %}
+              <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Gestion</a>
+              {% endif %}
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="" id="dropdown3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Mes produits</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown3">
-                        <a class="dropdown-item" href="">Afficher mes produits</a>
-                        <a class="dropdown-item" href="">Gerer mes produits</a>
-                    </div>
-                </li>
-            {% endif %}
 
-            {% if app.session.get('logged') is defined and  app.session.get('logged') == 1 and app.session.get('droit') == 'Droit_Admin' %}
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="" id="dropdown4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                         Utilisateurs</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown4">
-                        <a class="dropdown-item" href="">Gerer les utilisateurs</a>
-                    </div>
-                </li>
-            {% endif %}
-        </ul>
-    </div>
-
-    <ul class="nav justify-content-end navbar-nav mr-auto">
-        {% if app.session.get('logged') is defined and  app.session.get('logged') == 1 %}
-            <li class="text-info" style="color: #1b1e21">Connecté en tant que : {{ app.session.get('prenom_utilisateur') }} ,{{ app.session.get('nom_utilisateur') }} </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('user.logout')  }}" >Se déconnecter </a>
-            </li>
-        {% else %}
-            <li class="nav-item"><a class="nav-link" href="{{ path('user.login')  }}">Se connecter</a></li>
-        {% endif %}
-    </ul>
-
-</nav>
+            </nav>
+              {% if   app.session.get('logged') is defined and  app.session.get('logged') == 1 %}
+                <span class="text-info" style="color: #1b1e21">Connecter en tant que : {{ app.session.get('nom_utilisateur')}} {{ app.session.get('prenom_utilisateur')}}</span>
+              {% endif %}
+          </div>
+        </div>
+      </div>
