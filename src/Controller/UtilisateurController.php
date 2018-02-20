@@ -61,12 +61,17 @@ class UtilisateurController implements ControllerProviderInterface
         return $app->redirect($app["url_generator"]->generate("accueil"));
     }
 
+    public function showChoixProfil(Application $app){
+        return $app["twig"]->render('Utilisateur/choixProfilClient.html.twig');
+    }
+
     public function connect(Application $app) {
         $controllers = $app['controllers_factory'];
         $controllers->match('/', 'App\Controller\UtilisateurController::index')->bind('user.index');
         $controllers->get('/login', 'App\Controller\UtilisateurController::connexionUser')->bind('user.login');
         $controllers->post('/login', 'App\Controller\UtilisateurController::validFormConnexionUser')->bind('user.validFormlogin');
         $controllers->get('/logout', 'App\Controller\UtilisateurController::deconnexionSession')->bind('user.logout');
+        $controllers->get('/showChoixProfil', 'App\Controller\UtilisateurController::showChoixProfil')->bind('user.choix');
         return $controllers;
     }
 }

@@ -20,27 +20,71 @@
             <nav class="android-navigation mdl-navigation">
 
               <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{{path('produit.showProduitsC')}}">Produits</a>
+                {% if app.session.get('logged') is defined and  app.session.get('logged') == 1 and app.session.get('droit') == 'Droit_Admin' %}
+                    <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Gestion</a>
+                {% endif %}
                 {% if   app.session.get('logged') is defined and  app.session.get('logged') != 1 %}
                   <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{{  path('user.login') }}">Connexion</a>
                   <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{{  path('user.login') }}">Inscription</a>
                 {% else %}
-                  <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Mon profil</a>
+                  <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{{  path('user.choix') }}">Mon profil</a>
                   <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{{  path('user.logout') }}">Deconnexion</a>
                 {% endif %}
 
 
 
-
-                {% if app.session.get('logged') is defined and  app.session.get('logged') == 1 and app.session.get('droit') == 'Droit_Admin' %}
-              <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Gestion</a>
-              {% endif %}
-
-
-
             </nav>
-              {% if   app.session.get('logged') is defined and  app.session.get('logged') == 1 %}
-                <span class="text-info" style="color: #1b1e21">Connecter en tant que : {{ app.session.get('nom_utilisateur')}} {{ app.session.get('prenom_utilisateur')}}</span>
-              {% endif %}
+
           </div>
         </div>
+      </div>
+      <div class="android-drawer mdl-layout__drawer">
+        <span class="mdl-layout-title">
+        {% if   app.session.get('logged') is defined and  app.session.get('logged') == 1 %}
+            Bienvenue, <br>
+            {{ app.session.get('nom_utilisateur')}} {{ app.session.get('prenom_utilisateur')}}
+        {% else %}
+            Bienvnue sur <br>
+            EasyDeals
+        {% endif %}
+
+        </span>
+          <nav class="mdl-navigation">
+              {% if   app.session.get('logged') is defined and  app.session.get('logged') == 1 %}
+              <a class="mdl-navigation__link" href="">Gestion du compte</a>
+              {% endif %}
+              <span class="mdl-navigation__link" href="">Produits</span>
+              <a class="mdl-navigation__link" href="">Consulter Produits</a>
+              {% if app.session.get('logged') is defined and  app.session.get('logged') == 1 and app.session.get('droit') != 'Droit_Client' %}
+              <a class="mdl-navigation__link" href="">Gerer Produits</a>
+              {% endif %}
+              {% if   app.session.get('logged') is defined and  app.session.get('logged') == 1 %}
+              <div class="android-drawer-separator"></div>
+              <span class="mdl-navigation__link" href="">Commandes</span>
+              <a class="mdl-navigation__link" href="">Mes commandes</a>
+              {% if app.session.get('logged') is defined and  app.session.get('logged') == 1 and app.session.get('droit') != 'Droit_Client' %}
+              <a class="mdl-navigation__link" href="">Commandes Clients</a>
+              {% endif %}
+              <div class="android-drawer-separator"></div>
+              {% if app.session.get('logged') is defined and  app.session.get('logged') == 1 and app.session.get('droit') == 'Droit_Admin' %}
+              <span class="mdl-navigation__link" href="">Admin Gestion</span>
+              <a class="mdl-navigation__link" href="">Users</a>
+
+                  <a class="mdl-navigation__link" href="">Commandes</a>
+                  <a class="mdl-navigation__link" href="">Produits</a>
+              {% endif %}
+              {% endif %}
+              <div class="android-drawer-separator"></div>
+
+              <span class="mdl-navigation__link" href="">Autres</span>
+              {% if   app.session.get('logged') is defined and  app.session.get('logged') != 1 %}
+              <a class="mdl-navigation__link" href="">Inscription</a>
+              <a class="mdl-navigation__link" href="{{  path('user.login') }}">Connexion</a>
+              {% else %}
+              <a class="mdl-navigation__link" href="{{  path('user.logout') }}">Se deconnecter</a>
+              {% endif %}
+              <div class="android-drawer-separator"></div>
+          </nav>
+      </div>
+      <div class="android-content mdl-layout__content">
       </div>
