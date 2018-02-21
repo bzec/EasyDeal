@@ -7,9 +7,7 @@ use Silex\Api\ControllerProviderInterface;
 use Symfony\Component\HttpFoundation\Request;   // pour utiliser request
 
 use App\Model\ProduitModel;
-use App\Model\TypeProduitModel;
-use App\Model\PanierModel;
-use App\Model\CompteModel;
+
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -20,6 +18,7 @@ class ProduitController implements ControllerProviderInterface
 {
     private $produitModel;
     private $typeProduitModel;
+
 
 
     public function index(Application $app) {
@@ -43,16 +42,12 @@ class ProduitController implements ControllerProviderInterface
 
     }
 
-
-
     public function connect(Application $app) {  //http://silex.sensiolabs.org/doc/providers.html#controller-providers
         $controllers = $app['controllers_factory'];
 
         $controllers->get('/', 'App\Controller\produitController::index')->bind('produit.index');
         $controllers->get('/show', 'App\Controller\produitController::showProduitsC')->bind('produit.showProduitsC');
         $controllers->get('/detail', 'App\Controller\produitController::detailsProduit')->bind('produit.detail');
-
-
 
         return $controllers;
     }

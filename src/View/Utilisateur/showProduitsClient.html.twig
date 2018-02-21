@@ -1,9 +1,40 @@
 {% extends "layout.html.twig" %}
 {% block contenu %}
+<script >
+    var qte;
+    var idP;
+    function recupQTE(qteP,idProd) {
+        idP=idProd;
+        var txt;
+         qte = prompt("entrer la quantité souhaitée");
+        if (qte <= qteP && qte>0) {
+            txt = "Commande Valid";
+            modifier();
+        } else {
+            txt = "entrer une valeur inférieur à ";
+
+        }
+        confirm(txt);
+
+    }
+
+    function modifier(){
+            var url = 'http://web/RushProjet/ED/EasyDeal/public/app_dev.php/commande/add';
+            console.log(url);
+           url+='/'+idP+'/'+qte;
+            console.log(url);
+            window.location.replace(url);
+    }
+
+</script>
+
 <div class="android-content mdl-layout__content">
 <div class="android-more-section">
     <div class="android-section-title mdl-typography--display-1-color-contrast">Produits disponible</div>
     <div class="android-card-container mdl-grid">
+        {% if data is empty %}
+        <h1>Plus de produit dispo </h1>
+        {% endif %}
     {% for produit in data if data is not empty %}
         <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
             <div class="mdl-card__media">
@@ -18,15 +49,15 @@
     <span class="mdl-typography--font-light mdl-typography--subhead">
         prix du produits : {{ produit.prix_produits }} <br>
         Nom de l'entreprise : nom de l'entreprise <br>
-        Adresse : adresse de l'entreprise
+        Adresse : adresse de l'entreprise <br>
         Vous pouvez récupérer votre produit entre 7h00 et 18h00
     </span>
             </div>
             <div class="mdl-card__actions">
-                <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="">
+                <button class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" onclick="recupQTE({{ produit.stockProduit }}, {{ produit.id_produits }})">
                     Réserver
                     <i class="material-icons">chevron_right</i>
-                </a>
+                </button>
             </div>
         </div>
 
@@ -35,6 +66,7 @@
         {% endfor %}
 
     </div>
-{% endblock %}
 
+
+{% endblock %}
 

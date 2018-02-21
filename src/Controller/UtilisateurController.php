@@ -4,7 +4,6 @@ namespace App\Controller;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
 use Symfony\Component\HttpFoundation\Request;   // pour utiliser request
-use App\Model\PanierModel;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -65,6 +64,8 @@ class UtilisateurController implements ControllerProviderInterface
         return $app["twig"]->render('Utilisateur/choixProfilClient.html.twig');
     }
 
+
+
     public function connect(Application $app) {
         $controllers = $app['controllers_factory'];
         $controllers->match('/', 'App\Controller\UtilisateurController::index')->bind('user.index');
@@ -72,6 +73,7 @@ class UtilisateurController implements ControllerProviderInterface
         $controllers->post('/login', 'App\Controller\UtilisateurController::validFormConnexionUser')->bind('user.validFormlogin');
         $controllers->get('/logout', 'App\Controller\UtilisateurController::deconnexionSession')->bind('user.logout');
         $controllers->get('/showChoixProfil', 'App\Controller\UtilisateurController::showChoixProfil')->bind('user.choix');
+
         return $controllers;
     }
 }

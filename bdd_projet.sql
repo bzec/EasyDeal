@@ -82,32 +82,22 @@ INSERT INTO Utilisateur (id_utilisateur, sexe_utilisateur,nom_utilisateur, preno
  ( 3,'','admin','admin','','admin@gmail.com','21232f297a57a5a743894a0e4a801fc3','','Droit_Admin',0),
  ( 2 ,'Femme','Irina','Domohov','5 rue de moscou','irina@gmail.com','34fdd771c0b05faaf5f16b3b0ea12702','Moscva','Droit_Vendeur',2);
 
-CREATE TABLE Dates(
-	id_date int,
-	dates DateTime,
-	PRIMARY KEY (id_date)
-)DEFAULT CHARSET=utf8;
 
-INSERT INTO Dates (id_date, dates)
- VALUES
- (1 ,NOW()),
- (2 ,NOW());
 
 CREATE TABLE Commande(
-	id_commande int,
+	id_commande int AUTO_INCREMENT NOT NULL,
 	libelle_commande varchar(255),
 	prix_commande int,
-	id_date int,
+	dates DateTime,
 	id_utilisateur int,
 	PRIMARY KEY(id_commande),
-	CONSTRAINT fk_Utilisateur_Commande FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur(id_utilisateur),
-	CONSTRAINT fk_Date_Commande FOREIGN KEY (id_date) REFERENCES Dates(id_date)
+	CONSTRAINT fk_Utilisateur_Commande FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur(id_utilisateur)
 )DEFAULT CHARSET=utf8;
 
-INSERT INTO Commande (id_commande, libelle_commande,prix_commande,id_date,id_utilisateur)
+INSERT INTO Commande (id_commande, libelle_commande,prix_commande,dates,id_utilisateur)
  VALUES
- (1 ,'commande1',5,1,1),
- (2 ,'commande2',10,2,1);
+ (1 ,'commande1',5,NOW(),1),
+ (2 ,'commande2',10,NOW(),1);
 
 CREATE TABLE TypeProduits(
 	id_typeProduits int AUTO_INCREMENT NOT NULL,
@@ -159,8 +149,3 @@ CREATE TABLE Concerne (
 	CONSTRAINT fk_Produit_Concerne FOREIGN KEY (id_produits) REFERENCES Produits(id_produits),
 	CONSTRAINT fk_Commande_Concerne FOREIGN KEY (id_commande) REFERENCES Commande(id_commande)
 )DEFAULT CHARSET=utf8;
-
-INSERT INTO Concerne (id_commande, id_produits,quantite)
- VALUES
- (1 ,1,1),
- (2 ,2,2);

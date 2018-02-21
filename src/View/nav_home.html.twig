@@ -53,15 +53,16 @@
               {% if   app.session.get('logged') is defined and  app.session.get('logged') == 1 %}
               <a class="mdl-navigation__link" href="">Gestion du compte</a>
               {% endif %}
-              <span class="mdl-navigation__link" href="">Produits</span>
-              <a class="mdl-navigation__link" href="">Consulter Produits</a>
+              <div class="android-drawer-separator"></div>
+              <span class="mdl-navigation__link">Produits</span>
+              <a class="mdl-navigation__link" href="{{path('produit.showProduitsC')}}">Consulter Produits</a>
               {% if app.session.get('logged') is defined and  app.session.get('logged') == 1 and app.session.get('droit') != 'Droit_Client' %}
               <a class="mdl-navigation__link" href="">Gerer Produits</a>
               {% endif %}
               {% if   app.session.get('logged') is defined and  app.session.get('logged') == 1 %}
               <div class="android-drawer-separator"></div>
-              <span class="mdl-navigation__link" href="">Commandes</span>
-              <a class="mdl-navigation__link" href="">Mes commandes</a>
+              <span class="mdl-navigation__link" >Commandes</span>
+              <a class="mdl-navigation__link" href="{{path('commande.mesCommandes')}}">Mes commandes</a>
               {% if app.session.get('logged') is defined and  app.session.get('logged') == 1 and app.session.get('droit') != 'Droit_Client' %}
               <a class="mdl-navigation__link" href="">Commandes Clients</a>
               {% endif %}
@@ -74,8 +75,6 @@
                   <a class="mdl-navigation__link" href="">Produits</a>
               {% endif %}
               {% endif %}
-              <div class="android-drawer-separator"></div>
-
               <span class="mdl-navigation__link" href="">Autres</span>
               {% if   app.session.get('logged') is defined and  app.session.get('logged') != 1 %}
               <a class="mdl-navigation__link" href="">Inscription</a>
