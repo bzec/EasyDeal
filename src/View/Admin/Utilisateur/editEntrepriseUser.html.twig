@@ -1,0 +1,37 @@
+{% extends "layout.html.twig" %}
+{% block contenu %}
+
+    <div class="android-content mdl-layout__content">
+    <div class="android-more-section">
+
+    <form method="post" action="{{ path('user.editFromEntreUser') }}" style="background-color: #99CDD8;border-radius: 15px ">
+
+        <input class="mdl-textfield__input" name="id_utilisateur"  type="hidden" value="{{donnees.id_utilisateur}}">
+        <input class="mdl-textfield__input" name="id_typeEntreprise"  type="hidden" value="{{donnees.id_typeEntreprise}}">
+        <input class="mdl-textfield__input" name="id_entreprise"  type="hidden" value="{{donnees.id_entreprise}}">
+        <input class="mdl-textfield__input" name="id_localisation"  type="hidden" value="{{donnees.id_localisation}}">
+
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <label class="mdl-textfield__label" >adresse :</label>
+            <input class="mdl-textfield__input" name="adresse"  type="text"  value="{{donnees.adresse}}"  required>
+        </div>
+        <br>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <label class="mdl-textfield__label" >libelle entreprise :</label>
+            <input class="mdl-textfield__input" name="libelle_entreprise"  type="text"  value="{{donnees.libelle_entreprise}}"  required>
+        </div>
+        <br>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <label class="mdl-textfield__label" >siren :</label>
+            <input class="mdl-textfield__input" name="siren"  type="text"  value="{{donnees.siren}}"  required>
+        </div>
+        <br>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <label class="mdl-textfield__label" >libelle type  :</label>
+            <input class="mdl-textfield__input" name="libelle_typeEntreprise"  type="text"  value="{{donnees.libelle_typeEntreprise}}"  required>
+        </div>
+
+        <button> valider </button>
+    </form>
+
+{% endblock %}

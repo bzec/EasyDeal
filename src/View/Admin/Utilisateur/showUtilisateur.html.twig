@@ -32,8 +32,10 @@
 				{% endif %}
                 <td class="mdl-data-table__cell--non-numeric"><a href="{{ path('user.editUser',{ id_utilisateur: user.id_utilisateur})}})  }}">Modifier</a></td>
                 <td class="mdl-data-table__cell--non-numeric"><a href="{{ path('user.delUser',{ id_utilisateur: user.id_utilisateur})}})  }}">Supprimer</a></td>
+                <td class="mdl-data-table__cell--non-numeric"><a href="{{ path('user.editP',{ id_utilisateur: user.id_utilisateur})}})  }}">modif mdp</a></td>
+                <td class="mdl-data-table__cell--non-numeric"><a href="{{ path('user.editEntrUser',{ id_utilisateur: user.id_utilisateur})}})  }}">modif Entre</a></td>
 
-			</tr>
+            </tr>
         {% endfor %}
 
 		</table>

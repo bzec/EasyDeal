@@ -32,6 +32,28 @@ class ProduitController implements ControllerProviderInterface
         return $app["twig"]->render('/Utilisateur/showProduitsClient.html.twig',['data'=>$produits]);
     }
 
+
+    public function showProduitsA(Application $app) {
+        $this->produitModel = new ProduitModel($app);
+        $produits = $this->produitModel->getAllProduits();
+
+        return $app["twig"]->render('/Admin/Produit/showProduitsAdmin.html.twig',['data'=>$produits]);
+    }
+    //Fonction a utiliser aussi pour vendeur
+    public function deleteProduits(Application $app, Request $req) {
+
+        $id=$app->escape($req->get('idProduit'));
+        $this->produitModel = new ProduitModel($app);
+        $this->produitModel->deleteProduit($id);
+        if ( $app['session']->get('droit') == 'Droit_Admin') {
+            echo "coucou";
+            return $app->redirect($app["url_generator"]->generate("produit.showProduitsA"));
+        }
+        else{
+            return "redirection du vendeur.";
+        }
+    }
+
     public function detailsProduit(Application $app,Request $req){
 
         $idP=$app->escape($req->get('idProduit'));
@@ -47,7 +69,9 @@ class ProduitController implements ControllerProviderInterface
 
         $controllers->get('/', 'App\Controller\produitController::index')->bind('produit.index');
         $controllers->get('/show', 'App\Controller\produitController::showProduitsC')->bind('produit.showProduitsC');
+        $controllers->get('/showAdmin', 'App\Controller\produitController::showProduitsA')->bind('produit.showProduitsA');
         $controllers->get('/detail', 'App\Controller\produitController::detailsProduit')->bind('produit.detail');
+        $controllers->get('/deleteP', 'App\Controller\produitController::deleteProduits')->bind('produit.deleteProduit');
 
         return $controllers;
     }

@@ -46,6 +46,7 @@ CREATE TABLE Entreprise(
 	id_localisation int,
 	id_typeEntreprise int,
 	id_avis int,
+	siren varchar(255),
 	PRIMARY KEY (id_entreprise),
 	CONSTRAINT fk_LocalisatioinEntreprise_Entreprise FOREIGN KEY (id_localisation) REFERENCES LocalisationEntreprise(id_localisation),
 	CONSTRAINT fk_LocalisatioinEntreprise_Entreprise FOREIGN KEY (id_localisation) REFERENCES LocalisationEntreprise(id_localisation),

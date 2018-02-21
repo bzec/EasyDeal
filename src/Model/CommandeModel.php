@@ -30,6 +30,17 @@ class CommandeModel{
 
     }
 
+    public function getAllCommandeA(){
+        $queryBuilder = new QueryBuilder($this->db);
+        $queryBuilder
+            ->select('*')
+            ->from('Commande', 'c')
+            ->innerJoin('c', 'Utilisateur', 'u', 'c.id_utilisateur=u.id_utilisateur')
+            ->addOrderBy('c.dates', 'DESC');
+        return $queryBuilder->execute()->fetchAll();
+
+    }
+
     public function getIdCommandeByData($donnees){
         $queryBuilder = new QueryBuilder($this->db);
         $queryBuilder
@@ -66,18 +77,19 @@ class CommandeModel{
 
     }
 
-    public function DeleteCommande($idCommande){
+    public function updateCommande($donnees){
+
+    }
+
+    public function DeleteComande($idCom)
+    {
         $queryBuilder = new QueryBuilder($this->db);
         $queryBuilder
             ->delete('Commande')
             ->where('id_commande = :id_commande')
-            ->setParameter('id_commande',(int)$idCommande)
+            ->setParameter('id_commande',(int)$idCom)
         ;
         return $queryBuilder->execute();
-    }
-
-    public function updateCommande($donnees){
-
     }
 
 }

@@ -87,10 +87,58 @@ class UtilisateurController implements ControllerProviderInterface
 
     }
 
-    public function validModifUser(Application $app, Request $req){
-        
+    public function validModifUser(Application $app){
+        if (isset($_POST['name']) and isset($_POST['prenom']) and isset($_POST['adresse']) and isset($_POST['email']) and isset($_POST['password']) and isset($_POST['ville'])) {
+            $donnees = [
+                'id_utilisateur' => htmlentities($_POST['id_utilisateur']),
+                'nom_utilisateur' => htmlspecialchars($_POST['name']),                    // echapper les entrées
+                'prenom_utilisateur' => htmlspecialchars($_POST['prenom']),
+                'adresse_utilisateur' => htmlspecialchars($_POST['adresse']),
+                'adresseMail_utilisateur' => htmlentities($_POST['email']),
+                'password_utilisateur' => htmlentities(md5($_POST['password'])),
+                'ville' => htmlentities($_POST['ville']),
+            ];
+            echo "coucou";
+            $this->utilisateurModel = new UtilisateurModel($app);
+            $this->utilisateurModel->updateUserAdmin($donnees);
+
+            return $app->redirect($app["url_generator"]->generate("user.showUser"));
+        }
+
     }
 
+    public function modifPUser(Application $app ,Request $req){
+        $idU=$app->escape($req->get('id_utilisateur'));
+        $this->utilisateurModel= new UtilisateurModel($app);
+        $data= $this->utilisateurModel->getUser($idU);
+        return $app["twig"]->render('Admin/Utilisateur/editPUtilisateur.html.twig',['donnees'=>$data]);
+
+    }
+
+    public function validPModifUser(Application $app){
+        if ( isset($_POST['password']) and isset($_POST['id_utilisateur'])) {
+
+            $this->utilisateurModel = new UtilisateurModel($app);
+            $this->utilisateurModel->updateMDP($_POST['id_utilisateur'],$_POST['password']);
+
+            return $app->redirect($app["url_generator"]->generate("user.showUser"));
+        }
+
+    }
+
+    public function editeEntrepriseUser(Application $app,Request $req){
+        $idU=$app->escape($req->get('id_utilisateur'));
+        $this->utilisateurModel = new UtilisateurModel($app);
+        $data=$this->utilisateurModel->getUserEntreprise($idU);
+        return $app["twig"]->render('Admin/Utilisateur/editEntrepriseUser.html.twig',['donnees'=>$data]);
+
+    }
+
+    public function editFormEntrepriseUser(Application $app,Request $req){
+
+        /* A remplir avec deux listes déroulante une pour ville et une pour type*/
+
+    }
     public function connect(Application $app) {
         $controllers = $app['controllers_factory'];
         $controllers->match('/', 'App\Controller\UtilisateurController::index')->bind('user.index');
@@ -102,6 +150,10 @@ class UtilisateurController implements ControllerProviderInterface
         $controllers->get('/deleteUser', 'App\Controller\UtilisateurController::supprimerUser')->bind('user.delUser');
         $controllers->get('/editUser', 'App\Controller\UtilisateurController::modifierUser')->bind('user.editUser');
         $controllers->post('/editFromUser', 'App\Controller\UtilisateurController::validModifUser')->bind('user.validModifUser');
+        $controllers->get('/editPUser', 'App\Controller\UtilisateurController::modifPUser')->bind('user.editP');
+        $controllers->post('/editFromPUser', 'App\Controller\UtilisateurController::validPModifUser')->bind('user.editFromP');
+        $controllers->get('/editEntrUser', 'App\Controller\UtilisateurController::editeEntrepriseUser')->bind('user.editEntrUser');
+        $controllers->post('/editEntFromUser', 'App\Controller\UtilisateurController::editFormEntrepriseUser')->bind('user.editFromEntreUser');
 
 
         return $controllers;
