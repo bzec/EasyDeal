@@ -54,4 +54,15 @@ class ProduitModel {
         return $queryBuilder->execute();
     }
 
+    public function getProduitType($nomTypeProduits){
+        $queryBuilder = new QueryBuilder($this->db);
+        $queryBuilder
+            ->select('*')
+            ->from('Produits', 'p')
+            ->where('t.libelle_typeProduits= ?')
+            ->innerJoin('p', 'TypeProduits', 't', 'p.id_typeProduits=t.id_typeProduits')
+            ->setParameter(0,$nomTypeProduits);
+        return $queryBuilder->execute()->fetchAll();
+    }
+
 }

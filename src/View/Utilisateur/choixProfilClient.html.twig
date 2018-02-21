@@ -1,26 +1,144 @@
 {% extends "layout.html.twig" %}
 {% block contenu %}
 
-    <div class="android-content mdl-layout__content" style="max-height: 40%; margin-bottom: auto;">
+    <div class="android-content mdl-layout__content">
+
+    {% if app.session.get('logged') is defined and  app.session.get('logged') == 1 and app.session.get('droit') == 'Droit_Client' %}
+
+    <div class="android-wear-section" style="height: 550px;">
+
         <div class="android-wear-band">
+            <div class="android-wear-band-text" >
+                <div class="mdl-typography--display-2 mdl-typography--font-thin">Produit</div>
+                    <p>
+                        <a class="mdl-typography--font-regular mdl-typography--text-uppercase android-alt-link" href="{{path('produit.showProduitsC')}}">
+                            Consulter les produits <i class="material-icons">chevron_right</i> </a>
+                    </p>
+            </div>
+
+
             <div class="android-wear-band-text">
-                <div class="mdl-typography--display-2 mdl-typography--font-thin">Gestion du compte</div>
+                <div class="mdl-typography--display-2 mdl-typography--font-thin">Commande</div>
+                <p>
+                    <a class="mdl-typography--font-regular mdl-typography--text-uppercase android-alt-link" href="{{path('commande.mesCommandes')}}">
+                        Consulter mes commandes <i class="material-icons">chevron_right</i> </a>
+                </p>
+            </div>
+
+
+            <div class="android-wear-band-text">
+                <div class="mdl-typography--display-2 mdl-typography--font-thin">Compte</div>
                 <p>
                     <a class="mdl-typography--font-regular mdl-typography--text-uppercase android-alt-link" href="">
-                        Allez sur la gestion du compte<i class="material-icons">chevron_right</i>
-                    </a>
+                        Modifier mon profil <i class="material-icons">chevron_right</i> </a>
                     <br>
-                    <a class="mdl-typography--font-regular mdl-typography--text-uppercase android-alt-link" href="{{path('commande.mesCommandes')}}">
-                        Allez sur la gestion des commandes <i class="material-icons">chevron_right</i>
-                    </a>
-                    <br>
-                    <a class="mdl-typography--font-regular mdl-typography--text-uppercase android-alt-link" href="">
-                        Allez sur la gestion des produits&nbsp;<i class="material-icons">chevron_right</i>
-                    </a>
+                    <a class="mdl-typography--font-regular mdl-typography--text-uppercase android-alt-link" href="{{  path('user.logout') }}">
+                        Se déconnecter <i class="material-icons">chevron_right</i> </a>
                 </p>
             </div>
         </div>
 
+    {% endif %}
 
+
+    {% if app.session.get('logged') is defined and  app.session.get('logged') == 1 and app.session.get('droit') == 'Droit_Vendeur' %}
+
+    <div class="android-wear-section" style="height: 550px;">
+
+    <div class="android-wear-band" >
+        <div class="android-wear-band-text" >
+            <div class="mdl-typography--display-2 mdl-typography--font-thin">Produit</div>
+            <p>
+                <a class="mdl-typography--font-regular mdl-typography--text-uppercase android-alt-link" href="{{path('produit.showProduitsC')}}">
+                    Consulter les produits <i class="material-icons">chevron_right</i> </a>
+                <br>
+                <a class="mdl-typography--font-regular mdl-typography--text-uppercase android-alt-link" href="">
+                    Gérer les produits <i class="material-icons">chevron_right</i> </a>
+            </p>
+        </div>
+
+
+        <div class="android-wear-band-text">
+            <div class="mdl-typography--display-2 mdl-typography--font-thin">Commande</div>
+            <p>
+                <a class="mdl-typography--font-regular mdl-typography--text-uppercase android-alt-link" href="{{path('commande.mesCommandes')}}">
+                    Consulter mes commandes <i class="material-icons">chevron_right</i> </a>
+                <br>
+                <a class="mdl-typography--font-regular mdl-typography--text-uppercase android-alt-link" href="">
+                    Gérer les commandes clients <i class="material-icons">chevron_right</i> </a>
+            </p>
+        </div>
+
+
+        <div class="android-wear-band-text">
+            <div class="mdl-typography--display-2 mdl-typography--font-thin">Compte</div>
+            <p>
+                <a class="mdl-typography--font-regular mdl-typography--text-uppercase android-alt-link" href="">
+                    Modifier mon profil <i class="material-icons">chevron_right</i> </a>
+                <br>
+                <a class="mdl-typography--font-regular mdl-typography--text-uppercase android-alt-link" href="{{  path('user.logout') }}">
+                    Se déconnecter <i class="material-icons">chevron_right</i> </a>
+            </p>
+        </div>
+    </div>
+
+    {% endif %}
+
+
+    {% if app.session.get('logged') is defined and  app.session.get('logged') == 1 and app.session.get('droit') == 'Droit_Admin' %}
+
+    <div class="android-wear-section" style="height: 800px;">
+        <div class="android-wear-band" >
+            <div class="android-wear-band-text" >
+                <div class="mdl-typography--display-2 mdl-typography--font-thin">Produit</div>
+                <p>
+                    <a class="mdl-typography--font-regular mdl-typography--text-uppercase android-alt-link" href="{{path('produit.showProduitsC')}}">
+                        Consulter les produits <i class="material-icons">chevron_right</i> </a>
+                    <br>
+                    <a class="mdl-typography--font-regular mdl-typography--text-uppercase android-alt-link" href="">
+                        Gérer les produits <i class="material-icons">chevron_right</i> </a>
+                </p>
+            </div>
+
+
+            <div class="android-wear-band-text">
+                <div class="mdl-typography--display-2 mdl-typography--font-thin">Commande</div>
+                <p>
+                    <a class="mdl-typography--font-regular mdl-typography--text-uppercase android-alt-link" href="{{path('commande.mesCommandes')}}">
+                        Consulter mes commandes <i class="material-icons">chevron_right</i> </a>
+                    <br>
+                    <a class="mdl-typography--font-regular mdl-typography--text-uppercase android-alt-link" href="">
+                        Gérer les commandes clients <i class="material-icons">chevron_right</i> </a>
+                </p>
+            </div>
+
+            <div class="android-wear-band-text">
+                <div class="mdl-typography--display-2 mdl-typography--font-thin">Gestion Admin</div>
+                <p>
+                    <a class="mdl-typography--font-regular mdl-typography--text-uppercase android-alt-link" href="">
+                        Utilisateur<i class="material-icons">chevron_right</i> </a>
+                    <br>
+                    <a class="mdl-typography--font-regular mdl-typography--text-uppercase android-alt-link" href="">
+                        Commandes<i class="material-icons">chevron_right</i> </a>
+                    <br>
+                    <a class="mdl-typography--font-regular mdl-typography--text-uppercase android-alt-link" href="">
+                        Produits<i class="material-icons">chevron_right</i> </a>
+                </p>
+            </div>
+
+
+            <div class="android-wear-band-text">
+                <div class="mdl-typography--display-2 mdl-typography--font-thin">Compte</div>
+                <p>
+                    <a class="mdl-typography--font-regular mdl-typography--text-uppercase android-alt-link" href="">
+                        Modifier mon profil <i class="material-icons">chevron_right</i> </a>
+                    <br>
+                    <a class="mdl-typography--font-regular mdl-typography--text-uppercase android-alt-link" href="{{  path('user.logout') }}">
+                        Se déconnecter <i class="material-icons">chevron_right</i> </a>
+                </p>
+            </div>
+        </div>
+
+    {% endif %}
 
 {% endblock %}
