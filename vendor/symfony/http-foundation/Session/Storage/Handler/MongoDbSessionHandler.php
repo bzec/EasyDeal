@@ -57,7 +57,7 @@ class MongoDbSessionHandler implements \SessionHandlerInterface
      * If you use such an index, you can drop `gc_probability` to 0 since
      * no garbage-collection is required.
      *
-     * @param \Mongo|\MongoClient|\MongoDB\Client $mongo   A MongoDB\Client, MongoClient or Mongo instance
+     * @param \Mongo|\MongoClient|\MongoDB\Utilisateur $mongo   A MongoDB\Utilisateur, MongoClient or Mongo instance
      * @param array                               $options An associative array of field options
      *
      * @throws \InvalidArgumentException When MongoClient or Mongo instance not provided

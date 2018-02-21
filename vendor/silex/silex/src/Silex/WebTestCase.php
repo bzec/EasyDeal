@@ -48,11 +48,11 @@ abstract class WebTestCase extends TestCase
     abstract public function createApplication();
 
     /**
-     * Creates a Client.
+     * Creates a Utilisateur.
      *
      * @param array $server Server parameters
      *
-     * @return Client A Client instance
+     * @return Client A Utilisateur instance
      */
     public function createClient(array $server = array())
     {

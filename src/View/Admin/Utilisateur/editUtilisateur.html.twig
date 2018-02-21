@@ -1,0 +1,80 @@
+{% extends "layout.html.twig" %}
+{% block contenu %}
+
+	<script>
+        function choixSatut() {
+            var x = document.getElementById("statut");
+            var i = x.selectedIndex;
+
+            if (x.options[i].text==="Vendeur"){
+                document.getElementById("vendeurTrue").style.visibility = "visible";
+                document.getElementById("vendeurTrue2").style.visibility = "visible";
+                document.getElementById("vendeurTrue3").style.visibility = "visible";
+                document.getElementById("vendeurTrue4").style.visibility = "visible";
+                document.getElementById("nameEntreprise").style.visibility = "visible";
+                document.getElementById("typeEntreprise").style.visibility = "visible";
+                document.getElementById("adresseEntreprise").style.visibility = "visible";
+                document.getElementById("Siren").style.visibility = "visible";
+
+            }else{
+                document.getElementById("vendeurTrue").style.visibility = "hidden";
+                document.getElementById("vendeurTrue2").style.visibility = "hidden";
+                document.getElementById("vendeurTrue3").style.visibility = "hidden";
+                document.getElementById("vendeurTrue4").style.visibility = "hidden";
+                document.getElementById("nameEntreprise").style.visibility = "hidden";
+                document.getElementById("typeEntreprise").style.visibility = "hidden";
+                document.getElementById("adresseEntreprise").style.visibility = "hidden";
+                document.getElementById("Siren").style.visibility = "hidden";
+
+            }
+        }
+	</script>
+
+	<div class="android-content mdl-layout__content">
+		<div class="android-more-section">
+
+			<form method="post" action="{{ path('user.validModifUser') }}" style="background-color: #99CDD8;border-radius: 15px ">
+
+
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<label class="mdl-textfield__label" >Nom :</label>
+					<input class="mdl-textfield__input" name="name"  type="text" value="{{donnees.nom_utilisateur}}" placeholder="Nom"  required>
+				</div>
+
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<label class="mdl-textfield__label" >Prénom :</label>
+					<input class="mdl-textfield__input" name="prenom"  type="text" value="{{donnees.prenom_utilisateur}}" placeholder="Prénom"  required>
+				</div>
+				<br>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<label class="mdl-textfield__label" >Adresse :</label>
+					<input class="mdl-textfield__input" name="adresse"  type="text" value="{{ donnees.adresse_utilisateur }}" placeholder="Prénom"  required>
+				</div>
+
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<label class="mdl-textfield__label" >Adresse Mail :</label>
+					<input class="mdl-textfield__input" name="email"  type="email" value="{{ donnees.adresseMail_utilisateur }}X" placeholder="Login"  required>
+				</div>
+				<br>
+				<div  class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+					<label  class="mdl-textfield__label" >Password</label>
+					<input class="mdl-textfield__input" name="password" type="password" placeholder="Password" required>
+				</div>
+
+				<div  class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+					<label  class="mdl-textfield__label" >Password Confirmer</label>
+					<input class="mdl-textfield__input" name="passwordConfirmed" type="password" placeholder="Password" required>
+				</div>
+				<br>
+
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<label  class="mdl-textfield__label" >ville</label>
+					<input class="mdl-textfield__input" name="ville" type="passwtextord" placeholder="ville" value="{{ donnees.ville }}" required>
+				</div>
+				<br>
+				<button> valider </button>
+			</form>
+
+{% endblock %}

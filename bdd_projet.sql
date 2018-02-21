@@ -107,10 +107,8 @@ CREATE TABLE TypeProduits(
 
 INSERT INTO TypeProduits (id_typeProduits, libelle_typeProduits)
  VALUES
- (1 ,'patisserie'),
- (2 ,'restaurant'),
- (3 ,'boulangerie'),
- (4 ,'centreCommercial');
+ (1 ,'Patisserie'),
+ (2 ,'Pizza');
 
 CREATE TABLE OrigineProduits(
 	id_origineProduits int AUTO_INCREMENT NOT NULL,

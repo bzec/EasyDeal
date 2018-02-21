@@ -24,7 +24,7 @@ use Doctrine\DBAL\Events;
 use Doctrine\Common\EventSubscriber;
 
 /**
- * MySQL Session Init Event Subscriber which allows to set the Client Encoding of the Connection.
+ * MySQL Session Init Event Subscriber which allows to set the Utilisateur Encoding of the Connection.
  *
  * @link       www.doctrine-project.org
  * @since      1.0
@@ -48,7 +48,7 @@ class MysqlSessionInit implements EventSubscriber
     private $_collation;
 
     /**
-     * Configure Charset and Collation options of MySQL Client for each Connection.
+     * Configure Charset and Collation options of MySQL Utilisateur for each Connection.
      *
      * @param string         $charset   The charset.
      * @param string|boolean $collation The collation, or FALSE if no collation.

@@ -64,7 +64,32 @@ class UtilisateurController implements ControllerProviderInterface
         return $app["twig"]->render('Utilisateur/choixProfilClient.html.twig');
     }
 
+    public function getAllUtilisateur(Application $app){
+        $this->utilisateurModel= new UtilisateurModel($app);
+         $data = $this->utilisateurModel->getAllUser();
+        return $app["twig"]->render('Admin/Utilisateur/showUtilisateur.html.twig',['data'=>$data]);
+    }
 
+    public function supprimerUser(Application $app, Request $req){
+        $idU=$app->escape($req->get('id_utilisateur'));
+        $this->utilisateurModel= new UtilisateurModel($app);
+        $this->utilisateurModel->deleteUser($idU);
+        return $app->redirect($app["url_generator"]->generate("user.showUser"));
+
+    }
+
+
+    public function modifierUser(Application $app, Request $req){
+        $idU=$app->escape($req->get('id_utilisateur'));
+        $this->utilisateurModel= new UtilisateurModel($app);
+      $data= $this->utilisateurModel->getUser($idU);
+        return $app["twig"]->render('Admin/Utilisateur/editUtilisateur.html.twig',['donnees'=>$data]);
+
+    }
+
+    public function validModifUser(Application $app, Request $req){
+        
+    }
 
     public function connect(Application $app) {
         $controllers = $app['controllers_factory'];
@@ -73,6 +98,11 @@ class UtilisateurController implements ControllerProviderInterface
         $controllers->post('/login', 'App\Controller\UtilisateurController::validFormConnexionUser')->bind('user.validFormlogin');
         $controllers->get('/logout', 'App\Controller\UtilisateurController::deconnexionSession')->bind('user.logout');
         $controllers->get('/showChoixProfil', 'App\Controller\UtilisateurController::showChoixProfil')->bind('user.choix');
+        $controllers->get('/showAllUser', 'App\Controller\UtilisateurController::getAllUtilisateur')->bind('user.showUser');
+        $controllers->get('/deleteUser', 'App\Controller\UtilisateurController::supprimerUser')->bind('user.delUser');
+        $controllers->get('/editUser', 'App\Controller\UtilisateurController::modifierUser')->bind('user.editUser');
+        $controllers->post('/editFromUser', 'App\Controller\UtilisateurController::validModifUser')->bind('user.validModifUser');
+
 
         return $controllers;
     }

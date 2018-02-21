@@ -1,0 +1,41 @@
+{% extends "layout.html.twig" %}
+{% block contenu %}
+
+<div class="android-content mdl-layout__content">
+	<div class="android-more-section">
+		<table class="mdl-data-table  mdl-shadow--2dp">
+			<thead>
+			<tr>
+
+				<th class="mdl-data-table__cell--non-numeric">Nom_utilisateur</th>
+				<th class="mdl-data-table__cell--non-numeric">Prenom_utilisateur</th>
+				<th class="mdl-data-table__cell--non-numeric">AdresseMail_utilisateu</th>
+                <th>Status</th>
+				<th>Operations</th>
+
+			</tr>
+			</thead>
+			<tbody>
+		{% if data is empty %}
+        <h1>Plus de user  </h1>
+        {% endif %}
+    	{% for user in data if data is not empty %}
+			<tr>
+
+				<td class="mdl-data-table__cell--non-numeric">{{ user.nom_utilisateur }}</td>
+				<td class="mdl-data-table__cell--non-numeric">{{ user.prenom_utilisateur }}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{ user.adresseMail_utilisateur }}</td>
+				{% if user.droit == 'Droit_Client' %}
+				<td class="mdl-data-table__cell--non-numeric">Client</td>
+				{% else %}
+				<td class="mdl-data-table__cell--non-numeric">Vendeur</td>
+				{% endif %}
+                <td class="mdl-data-table__cell--non-numeric"><a href="{{ path('user.editUser',{ id_utilisateur: user.id_utilisateur})}})  }}">Modifier</a></td>
+                <td class="mdl-data-table__cell--non-numeric"><a href="{{ path('user.delUser',{ id_utilisateur: user.id_utilisateur})}})  }}">Supprimer</a></td>
+
+			</tr>
+        {% endfor %}
+
+		</table>
+
+{% endblock %}

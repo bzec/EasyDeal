@@ -218,7 +218,7 @@ a img{
 .logo-font {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   line-height: 1;
-  color: #f3f3f3;
+  color: #767777;
   font-weight: 500;
 }
 
@@ -250,8 +250,7 @@ a img{
 }
 
 .android-screens {
-  margin-top: 40px;
-  text-align: center;
+  text-align: right;
   width: 100%;
   white-space: nowrap;
   overflow-x: auto;
