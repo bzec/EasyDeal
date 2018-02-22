@@ -8,6 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Security;
+use App\Model\EntrepriseModel;
 
 use App\Model\UtilisateurModel;
 
@@ -139,6 +140,14 @@ class UtilisateurController implements ControllerProviderInterface
         /* A remplir avec deux listes déroulante une pour ville et une pour type*/
 
     }
+
+    public function inscriptionUtilisateur(Application $app){
+        $this->typeEntreprise=new EntrepriseModel($app);
+        $typeEntreprise= $this->typeEntreprise->getAllEntreprise();
+        return $app["twig"]->render('inscription.html.twig',['data'=>$typeEntreprise]);
+    }
+
+
     public function connect(Application $app) {
         $controllers = $app['controllers_factory'];
         $controllers->match('/', 'App\Controller\UtilisateurController::index')->bind('user.index');
@@ -154,6 +163,7 @@ class UtilisateurController implements ControllerProviderInterface
         $controllers->post('/editFromPUser', 'App\Controller\UtilisateurController::validPModifUser')->bind('user.editFromP');
         $controllers->get('/editEntrUser', 'App\Controller\UtilisateurController::editeEntrepriseUser')->bind('user.editEntrUser');
         $controllers->post('/editEntFromUser', 'App\Controller\UtilisateurController::editFormEntrepriseUser')->bind('user.editFromEntreUser');
+        $controllers->get('/inscription', 'App\Controller\UtilisateurController::inscriptionUtilisateur')->bind('user.inscription');
 
 
         return $controllers;
