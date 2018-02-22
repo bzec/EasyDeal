@@ -56,19 +56,9 @@ class CommandeController implements ControllerProviderInterface
         $data['quantite']+=$q['stockProduit'];
         $this->produitModel->updateStockProduit($data['id_produits'],$data['quantite']);
         $this->concerneModel->deleteConcerne($idCom);
-        $this->commandeModel->DeleteComande($idCom);
-        if ($app['session']->get('droit')!='Droit_Admin') {
-            return $app->redirect($app["url_generator"]->generate("commande.mesCommandes"));
-        }else{
-            return $app->redirect($app["url_generator"]->generate("commande.admin"));
-        }
-    }
+        $this->commandeModel->DeleteCommande($idCom);
+        return $app->redirect($app["url_generator"]->generate("commande.mesCommandes"));
 
-
-    public function showCommandeAdmin(Application $app){
-        $this->commandeModel=new CommandeModel($app);
-        $data=$this->commandeModel->getAllCommandeA();
-        return $app["twig"]->render('Admin/Commande/showCommandeAdmin.html.twig' ,['data'=>$data]);
     }
 
     public function showCommande(Application $app){
@@ -91,7 +81,6 @@ class CommandeController implements ControllerProviderInterface
         $index = $app['controllers_factory'];
         $index->match("/add/{idP}/{qte}", 'App\Controller\CommandeController::addCommande')->bind('commande.add');
         $index->get('/showCommande', 'App\Controller\CommandeController::showCommande')->bind('commande.mesCommandes');
-        $index->get('/showCommandeAdmin', 'App\Controller\CommandeController::showCommandeAdmin')->bind('commande.admin');
         $index->get('/showDetailCommande', 'App\Controller\CommandeController::showDetailCommande')->bind('commande.detailsCommande');
         $index->get('/deleteCommande', 'App\Controller\CommandeController::deleteCommande')->bind('commande.del');
         return $index;
