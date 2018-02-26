@@ -28,6 +28,7 @@ class EntrepriseModel
         return $queryBuilder->execute()->fetchAll();
     }
 
+<<<<<<< HEAD
     public function insertEntreprise($donnees)
     {
         $queryBuilder = new QueryBuilder($this->db);
@@ -61,4 +62,6 @@ class EntrepriseModel
         return $queryBuilder->execute()->fetch();
     }
 
+=======
+>>>>>>> d66a08c41b85dcd88adf697f0ab63b683a66a92e
 }

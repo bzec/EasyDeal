@@ -35,21 +35,33 @@
     <div class="android-content mdl-layout__content">
         <div class="android-more-section">
 
+<<<<<<< HEAD
         <form method="post" action="{{ path('user.validFormInscr') }}" style="background-color: #99CDD8;border-radius: 15px ">
+=======
+        <form method="post" action="{{ path('user.validFormlogin') }}" style="background-color: #99CDD8;border-radius: 15px ">
+>>>>>>> d66a08c41b85dcd88adf697f0ab63b683a66a92e
 
 
                 <label  >Sexe :</label>
                 <br>
             <!-- Radio Button 1 -->
             <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="sexeH">
+<<<<<<< HEAD
                 <input type="radio" id="sexeH" class="mdl-radio__button" value="Homme" name="options" checked />
+=======
+                <input type="radio" id="sexeH" class="mdl-radio__button" name="options" checked />
+>>>>>>> d66a08c41b85dcd88adf697f0ab63b683a66a92e
                 <!-- intitial state checked using attribute checked  -->
                 <span class="mdl-radio__label">Homme</span>
             </label>
 
             <!-- Radio Button 2 -->
             <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="sexeF">
+<<<<<<< HEAD
                 <input type="radio" id="sexeF" class="mdl-radio__button" value="Femme" name="options" />
+=======
+                <input type="radio" id="sexeF" class="mdl-radio__button" name="options" />
+>>>>>>> d66a08c41b85dcd88adf697f0ab63b683a66a92e
                 <span class="mdl-radio__label">Femme</span>
             </label>
 
@@ -109,6 +121,7 @@
 <!------------------------------------------------------------------------------------------------------------------------------------>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="vendeurTrue" style="visibility: hidden;">
                 <label id="nameEntreprise" style="visibility: hidden;" class="mdl-textfield__label">Nom de l'entreprise :</label>
+<<<<<<< HEAD
                 <input pattern="[A-Za-z ]{2,}/*" class="mdl-textfield__input" name="nameEntreprise"  type="text" value="" placeholder="Nom de l'entreprise" >
             </div>
 
@@ -116,6 +129,15 @@
                     <select class="mdl-textfield__input" id="typeEntreprise" name="typeEntreprise"  style="visibility: hidden;">
                         {% for entreprise in data if data is not empty %}
                             <option value="{{ entreprise.id_typeEntreprise}}">{{ entreprise.libelle_typeEntreprise}}</option>
+=======
+                <input pattern="[A-Za-z ]{2,}/*" class="mdl-textfield__input" name="nameEntreprise"  type="text" value="" placeholder="Nom de l'entreprise"  required>
+            </div>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="vendeurTrue2" style="visibility: hidden;">
+                    <select class="mdl-textfield__input" id="typeEntreprise" name="typeEntreprise" style="visibility: hidden;">
+                        {% for entreprise in data if data is not empty %}
+                            <option value="{{ entreprise.libelle_entreprise}}">{{ entreprise.libelle_entreprise}}</option>
+>>>>>>> d66a08c41b85dcd88adf697f0ab63b683a66a92e
                         {% endfor %}
                     </select>
                     <label id="labTypeEntreprise" class="mdl-textfield__label" for="statut" style="visibility: hidden;">Choisir votre type d'entreprise </label>
@@ -124,16 +146,28 @@
 
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="vendeurTrue3" style="visibility: hidden;">
                 <label id="adresseEntreprise" style="visibility: hidden;" class="mdl-textfield__label">Adresse de l'entreprise :</label>
+<<<<<<< HEAD
                 <input pattern="[0-9A-Za-z ]{2,}/*" class="mdl-textfield__input" name="adresseEntreprise"  type="text" value="" placeholder="Adresse"  >
+=======
+                <input pattern="[0-9A-Za-z ]{2,}/*" class="mdl-textfield__input" name="adresseEntreprise"  type="text" value="" placeholder="Adresse"  required>
+>>>>>>> d66a08c41b85dcd88adf697f0ab63b683a66a92e
             </div>
 
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="vendeurTrue4" style="visibility: hidden;">
                 <label id="Siren" style="visibility: hidden;" class="mdl-textfield__label">Siren :</label>
+<<<<<<< HEAD
                 <input pattern="\d{9}" class="mdl-textfield__input" name="Siren"  type="text" value="" placeholder="Siren"  >
             </div>
 
             <div>
                 <button class="mdl-button mdl-js-button mdl-button--raised mld-button--colored" type="submit">
+=======
+                <input pattern="\d{9}" class="mdl-textfield__input" name="Siren"  type="text" value="" placeholder="Siren"  required>
+            </div>
+
+            <div>
+                <button class="mdl-button mdl-js-button mdl-button--raised mld-button--colored">
+>>>>>>> d66a08c41b85dcd88adf697f0ab63b683a66a92e
                     s'inscrire
                 </button>
             </div>

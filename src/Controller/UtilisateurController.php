@@ -146,6 +146,7 @@ class UtilisateurController implements ControllerProviderInterface
     }
 
     public function inscriptionUtilisateur(Application $app){
+<<<<<<< HEAD
         //modifier il faut recuoe les type pas les entreprise
         $this->typeEntreprise=new TypeEntrepriseModel($app);
         $typeEntreprise= $this->typeEntreprise->getAllTypeEntreprise();
@@ -194,6 +195,13 @@ class UtilisateurController implements ControllerProviderInterface
         $this->utilisateurModel->insertUser($donneeUser);
         return $app->redirect($app["url_generator"]->generate("user.login"));
     }
+=======
+        $this->typeEntreprise=new EntrepriseModel($app);
+        $typeEntreprise= $this->typeEntreprise->getAllEntreprise();
+        return $app["twig"]->render('inscription.html.twig',['data'=>$typeEntreprise]);
+    }
+
+>>>>>>> d66a08c41b85dcd88adf697f0ab63b683a66a92e
 
     public function connect(Application $app) {
         $controllers = $app['controllers_factory'];
@@ -211,7 +219,10 @@ class UtilisateurController implements ControllerProviderInterface
         $controllers->get('/editEntrUser', 'App\Controller\UtilisateurController::editeEntrepriseUser')->bind('user.editEntrUser');
         $controllers->post('/editEntFromUser', 'App\Controller\UtilisateurController::editFormEntrepriseUser')->bind('user.editFromEntreUser');
         $controllers->get('/inscription', 'App\Controller\UtilisateurController::inscriptionUtilisateur')->bind('user.inscription');
+<<<<<<< HEAD
         $controllers->post('/inscriptionFrom', 'App\Controller\UtilisateurController::validFormInscription')->bind('user.validFormInscr');
+=======
+>>>>>>> d66a08c41b85dcd88adf697f0ab63b683a66a92e
 
 
         return $controllers;
