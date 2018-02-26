@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Model\TypeEntrepriseModel;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
 use Symfony\Component\HttpFoundation\Request;   // pour utiliser request
@@ -8,14 +9,19 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Security;
+use App\Model\EntrepriseModel;
 
 use App\Model\UtilisateurModel;
+use App\Model\LocalisationEntrepriseModel;
 
 
 class UtilisateurController implements ControllerProviderInterface
 {
 
     private $utilisateurModel;
+    private $typeEntreprise;
+    private $entrepriseModel;
+    private $localisationentrepriseModel;
 
     public function index(Application $app) {
         return $this->connexionUser($app);
@@ -82,28 +88,27 @@ class UtilisateurController implements ControllerProviderInterface
     public function modifierUser(Application $app, Request $req){
         $idU=$app->escape($req->get('id_utilisateur'));
         $this->utilisateurModel= new UtilisateurModel($app);
-      $data= $this->utilisateurModel->getUser($idU);
+        $data= $this->utilisateurModel->getUser($idU);
         return $app["twig"]->render('Admin/Utilisateur/editUtilisateur.html.twig',['donnees'=>$data]);
 
     }
 
     public function validModifUser(Application $app){
-        if (isset($_POST['name']) and isset($_POST['prenom']) and isset($_POST['adresse']) and isset($_POST['email']) and isset($_POST['password']) and isset($_POST['ville'])) {
+        if (isset($_POST['name']) and isset($_POST['prenom']) and isset($_POST['adresse']) and isset($_POST['email'])  and isset($_POST['ville'])) {
             $donnees = [
                 'id_utilisateur' => htmlentities($_POST['id_utilisateur']),
                 'nom_utilisateur' => htmlspecialchars($_POST['name']),                    // echapper les entrées
                 'prenom_utilisateur' => htmlspecialchars($_POST['prenom']),
                 'adresse_utilisateur' => htmlspecialchars($_POST['adresse']),
                 'adresseMail_utilisateur' => htmlentities($_POST['email']),
-                'password_utilisateur' => htmlentities(md5($_POST['password'])),
                 'ville' => htmlentities($_POST['ville']),
             ];
-            echo "coucou";
             $this->utilisateurModel = new UtilisateurModel($app);
             $this->utilisateurModel->updateUserAdmin($donnees);
 
             return $app->redirect($app["url_generator"]->generate("user.showUser"));
         }
+        return $app->redirect($app["url_generator"]->generate("user.showUser"));
 
     }
 
@@ -139,6 +144,57 @@ class UtilisateurController implements ControllerProviderInterface
         /* A remplir avec deux listes déroulante une pour ville et une pour type*/
 
     }
+
+    public function inscriptionUtilisateur(Application $app){
+        //modifier il faut recuoe les type pas les entreprise
+        $this->typeEntreprise=new TypeEntrepriseModel($app);
+        $typeEntreprise= $this->typeEntreprise->getAllTypeEntreprise();
+        return $app["twig"]->render('inscription.html.twig',['data'=>$typeEntreprise]);
+    }
+
+    public function validFormInscription(Application $app){
+
+        if ($_POST['statut'] == 'Client'){
+            $droit='Droit_Client';
+        }else{
+            $droit='Droit_Vendeur';
+        }
+
+        $donneeUser=[
+            'sexe' => htmlentities($_POST['options']),
+            'nom' => htmlentities($_POST['name']),
+            'prenom' => htmlentities($_POST['prenom']),
+            'email' => htmlentities($_POST['email']),
+            'adresse' => htmlentities($_POST['adresse']),
+            'password' => htmlentities($_POST['password']),
+            'droit' => htmlentities($droit),
+            'ville' => htmlentities($_POST['country']),
+            ];
+        $donneeUser['ent']=null;
+        if ($droit=='Droit_Vendeur'){
+            $donneeEntreprise=[
+                'libelle_entreprise' => htmlentities($_POST['nameEntreprise']),
+                'id_typeEntreprise' => htmlentities($_POST['typeEntreprise']),
+                'Siren' => htmlentities($_POST['Siren']),
+                'adresseEntreprise'=>htmlentities($_POST['adresseEntreprise'])
+            ];
+            $this->entrepriseModel=new EntrepriseModel($app);
+            $this->localisationentrepriseModel=new LocalisationEntrepriseModel($app);
+            $this->localisationentrepriseModel->insertLocalisationEntreprise($donneeEntreprise['adresseEntreprise']);
+            $data=$this->localisationentrepriseModel->getLocalisationEntreprise($donneeEntreprise['adresseEntreprise']);
+            $donneeEntreprise['id_localisation']=$data['id_localisation'];
+            $this->entrepriseModel->insertEntreprise($donneeEntreprise);
+
+
+            $data=$this->entrepriseModel->getEntreprise($donneeEntreprise);
+            $donneeUser['ent']=$data['id_entreprise'];
+        }
+
+        $this->utilisateurModel=new UtilisateurModel($app);
+        $this->utilisateurModel->insertUser($donneeUser);
+        return $app->redirect($app["url_generator"]->generate("user.login"));
+    }
+
     public function connect(Application $app) {
         $controllers = $app['controllers_factory'];
         $controllers->match('/', 'App\Controller\UtilisateurController::index')->bind('user.index');
@@ -154,6 +210,8 @@ class UtilisateurController implements ControllerProviderInterface
         $controllers->post('/editFromPUser', 'App\Controller\UtilisateurController::validPModifUser')->bind('user.editFromP');
         $controllers->get('/editEntrUser', 'App\Controller\UtilisateurController::editeEntrepriseUser')->bind('user.editEntrUser');
         $controllers->post('/editEntFromUser', 'App\Controller\UtilisateurController::editFormEntrepriseUser')->bind('user.editFromEntreUser');
+        $controllers->get('/inscription', 'App\Controller\UtilisateurController::inscriptionUtilisateur')->bind('user.inscription');
+        $controllers->post('/inscriptionFrom', 'App\Controller\UtilisateurController::validFormInscription')->bind('user.validFormInscr');
 
 
         return $controllers;

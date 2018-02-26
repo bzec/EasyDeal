@@ -81,7 +81,7 @@ class CommandeModel{
 
     }
 
-    public function DeleteComande($idCom)
+    public function DeleteCommande($idCom)
     {
         $queryBuilder = new QueryBuilder($this->db);
         $queryBuilder

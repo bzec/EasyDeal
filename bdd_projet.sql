@@ -60,7 +60,7 @@ INSERT INTO Entreprise (id_entreprise, libelle_entreprise,id_localisation, id_ty
  (2 ,'Boulangerie du coin',1,2,1);
 
 CREATE TABLE Utilisateur(
-	id_utilisateur int,
+	id_utilisateur int  auto_increment not NULL ,
 	sexe_utilisateur varchar(255),
 	nom_utilisateur varchar(255),
 	prenom_utilisateur varchar(255),
@@ -131,6 +131,7 @@ CREATE TABLE Produits(
 	id_typeProduits int,
 	id_origineProduits int,
 	id_utilisateur int,
+	image varchar(255),
 	PRIMARY KEY (id_produits),
 	CONSTRAINT fk_typeProduits_Produits FOREIGN KEY (id_typeProduits) REFERENCES TypeProduits(id_typeProduits),
 	CONSTRAINT fk_utilisateur_Produits FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur(id_utilisateur),
@@ -150,3 +151,8 @@ CREATE TABLE Concerne (
 	CONSTRAINT fk_Produit_Concerne FOREIGN KEY (id_produits) REFERENCES Produits(id_produits),
 	CONSTRAINT fk_Commande_Concerne FOREIGN KEY (id_commande) REFERENCES Commande(id_commande)
 )DEFAULT CHARSET=utf8;
+
+INSERT INTO Concerne (id_commande, id_produits,	quantite)
+ VALUES
+ (2 ,1,1),
+ (1 ,2,1);

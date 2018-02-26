@@ -25,7 +25,7 @@
                 {% endif %}
                 {% if   app.session.get('logged') is defined and  app.session.get('logged') != 1 %}
                   <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{{  path('user.login') }}">Connexion</a>
-                  <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{{  path('user.login') }}">Inscription</a>
+                  <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{{  path('user.inscription') }}">Inscription</a>
                 {% else %}
                   <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{{  path('user.choix') }}">Mon profil</a>
                   <a class="mdl-navigation__link mdl-typography--text-uppercase" href="{{  path('user.logout') }}">Deconnexion</a>
@@ -68,7 +68,7 @@
               {% endif %}
               <div class="android-drawer-separator"></div>
               {% if app.session.get('logged') is defined and  app.session.get('logged') == 1 and app.session.get('droit') == 'Droit_Admin' %}
-              <span class="mdl-navigation__link" href="">Admin Gestion</span>
+              <span class="mdl-navigation__link" href="{{  path('user.inscription') }}">Admin Gestion</span>
               <a class="mdl-navigation__link" href="{{ path('user.showUser') }}">Users</a>
 
                   <a class="mdl-navigation__link" href="{{ path("commande.admin") }}">Commandes</a>

@@ -56,14 +56,13 @@ class CommandeController implements ControllerProviderInterface
         $data['quantite']+=$q['stockProduit'];
         $this->produitModel->updateStockProduit($data['id_produits'],$data['quantite']);
         $this->concerneModel->deleteConcerne($idCom);
-        $this->commandeModel->DeleteComande($idCom);
-        if ($app['session']->get('droit')!='Droit_Admin') {
-            return $app->redirect($app["url_generator"]->generate("commande.mesCommandes"));
-        }else{
+        $this->commandeModel->DeleteCommande($idCom);
+        if( $app['session']->get('droit')=='Droit_Admin'){
             return $app->redirect($app["url_generator"]->generate("commande.admin"));
+        }else{
+            return $app->redirect($app["url_generator"]->generate("commande.mesCommandes"));
         }
     }
-
 
     public function showCommandeAdmin(Application $app){
         $this->commandeModel=new CommandeModel($app);
@@ -82,7 +81,6 @@ class CommandeController implements ControllerProviderInterface
         $idCommande=$app->escape($req->get('idCommande'));
         $this->concerneModel=new ConcerneModel($app);
         $data=$this->concerneModel->getConcerne($idCommande);
-
         return $app["twig"]->render('Utilisateur/showDetailsCommandeClient.html.twig' ,['data'=>$data]);
     }
 

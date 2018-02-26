@@ -52,7 +52,7 @@ class UtilisateurModel {
             ->from('Utilisateur', 'u')
             ->where('u.id_utilisateur= ?')
             ->innerJoin('u', 'Entreprise', 'e', 'u.id_Entreprise=e.id_Entreprise')
-            ->innerJoin('e', 'TypeEntreprise', 'te', 'e.id_typeEntreprise=te.id_typeEntreprise')
+            ->innerJoin('e', 'TypeEntrepriseModel.php', 'te', 'e.id_typeEntreprise=te.id_typeEntreprise')
             ->innerJoin('e', 'LocalisationEntreprise', 'l', 'l.id_localisation=e.id_localisation')
             ->setParameter(0,$idU);
         ;
@@ -68,7 +68,7 @@ class UtilisateurModel {
             ->from('Utilisateur', 'u')
             ->where('u.id_utilisateur= ?')
             ->innerJoin('u', 'Entreprise', 'e', 'u.id_Entreprise=e.id_Entreprise')
-            ->innerJoin('e', 'TypeEntreprise', 'te', 'e.id_typeEntreprise=te.id_typeEntreprise')
+            ->innerJoin('e', 'TypeEntrepriseModel.php', 'te', 'e.id_typeEntreprise=te.id_typeEntreprise')
             ->innerJoin('e', 'LocalisationEntreprise', 'l', 'l.id_localisation=e.id_localisation')
             ->setParameter(0,$idU);
         ;
@@ -105,6 +105,36 @@ class UtilisateurModel {
             ->setParameter(0,md5($mdp))
             ->setParameter(1,$idU );;
         return $queryBuilder->execute();
+    }
+
+    public function insertUser($donnees){
+        $queryBuilder = new QueryBuilder($this->db);
+        $queryBuilder->insert('Utilisateur')
+            ->values([
+                'sexe_utilisateur' => '?',
+                'nom_utilisateur' => '?',
+                'prenom_utilisateur' => '?',
+                'adresse_utilisateur' => '?',
+                'adresseMail_utilisateur' => '?',
+                'password_utilisateur' => '?',
+                'ville' => '?',
+                'droit' => '?',
+                'id_entreprise' => '?',
+
+            ])
+            ->setParameter(0, $donnees['sexe'])
+            ->setParameter(1, $donnees['nom'])
+            ->setParameter(2, $donnees['prenom'])
+            ->setParameter(3, $donnees['adresse'])
+            ->setParameter(4, $donnees['email'])
+            ->setParameter(5, md5($donnees['password']))
+            ->setParameter(6, $donnees['ville'])
+            ->setParameter(7, $donnees['droit'])
+            ->setParameter(8, $donnees['ent'])
+        ;
+        echo $queryBuilder;
+        return $queryBuilder->execute();
+
     }
     // public function verif_login_mdp_Utilisateur($login,$mdp){
     // 	$sql = "SELECT id,login,password,droit FROM users WHERE login = ? AND password = ?";

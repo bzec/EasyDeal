@@ -1,0 +1,143 @@
+{% extends "layout.html.twig" %}
+{% block contenu %}
+
+    <script>
+        function choixSatut() {
+            var x = document.getElementById("statut");
+            var i = x.selectedIndex;
+
+            if (x.options[i].text==="Vendeur"){
+                document.getElementById("vendeurTrue").style.visibility = "visible";
+                document.getElementById("vendeurTrue2").style.visibility = "visible";
+                document.getElementById("vendeurTrue3").style.visibility = "visible";
+                document.getElementById("vendeurTrue4").style.visibility = "visible";
+                document.getElementById("nameEntreprise").style.visibility = "visible";
+                document.getElementById("typeEntreprise").style.visibility = "visible";
+                document.getElementById("labTypeEntreprise").style.visibility = "visible";
+                document.getElementById("adresseEntreprise").style.visibility = "visible";
+                document.getElementById("Siren").style.visibility = "visible";
+
+            }else{
+                document.getElementById("vendeurTrue").style.visibility = "hidden";
+                document.getElementById("vendeurTrue2").style.visibility = "hidden";
+                document.getElementById("vendeurTrue3").style.visibility = "hidden";
+                document.getElementById("vendeurTrue4").style.visibility = "hidden";
+                document.getElementById("nameEntreprise").style.visibility = "hidden";
+                document.getElementById("typeEntreprise").style.visibility = "hidden";
+                document.getElementById("labTypeEntreprise").style.visibility = "hidden";
+                document.getElementById("adresseEntreprise").style.visibility = "hidden";
+                document.getElementById("Siren").style.visibility = "hidden";
+
+            }
+        }
+    </script>
+
+    <div class="android-content mdl-layout__content">
+        <div class="android-more-section">
+
+        <form method="post" action="{{ path('user.validFormInscr') }}" style="background-color: #99CDD8;border-radius: 15px ">
+
+
+                <label  >Sexe :</label>
+                <br>
+            <!-- Radio Button 1 -->
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="sexeH">
+                <input type="radio" id="sexeH" class="mdl-radio__button" value="Homme" name="options" checked />
+                <!-- intitial state checked using attribute checked  -->
+                <span class="mdl-radio__label">Homme</span>
+            </label>
+
+            <!-- Radio Button 2 -->
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="sexeF">
+                <input type="radio" id="sexeF" class="mdl-radio__button" value="Femme" name="options" />
+                <span class="mdl-radio__label">Femme</span>
+            </label>
+
+                <br>
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <label class="mdl-textfield__label" >Nom :</label>
+                <input pattern="[A-Za-z ]{2,}/*" class="mdl-textfield__input" name="name"  type="text" value="" placeholder="Nom"  required>
+            </div>
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <label class="mdl-textfield__label" >Prénom :</label>
+                <input pattern="[A-Za-z ]{2,}/*" class="mdl-textfield__input" name="prenom"  type="text" value="" placeholder="Prénom"  required>
+            </div>
+            <br>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <label class="mdl-textfield__label" >Adresse :</label>
+                <input pattern="[0-9A-Za-z ]{2,}/*" class="mdl-textfield__input" name="adresse"  type="text" value="" placeholder="Adresse"  required>
+            </div>
+
+             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                 <label class="mdl-textfield__label" >Adresse Mail :</label>
+                 <input class="mdl-textfield__input" name="email"  type="email" value="" placeholder="Login"  required>
+            </div>
+           <br>
+            <div  class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                 <label  class="mdl-textfield__label" >Password</label>
+                 <input pattern="[0-9A-Za-z ]{2,}/*"  class="mdl-textfield__input" name="password" type="password" placeholder="Password" required>
+             </div>
+
+            <div  class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <label  class="mdl-textfield__label" >Password Confirmer</label>
+                <input pattern="[0-9A-Za-z ]{2,}/*" class="mdl-textfield__input" name="passwordConfirmed" type="password" placeholder="Password" required>
+            </div>
+
+            <br>
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <select class="mdl-textfield__input" id="country" name="country">
+                    <option></option>
+                    <option value="FR">Belfort</option>
+                    <option value="BESAC">besancon</option>
+                    <option value="PARIS">Paris</option>
+                </select>
+                <label class="mdl-textfield__label" for="octane">Country</label>
+            </div>
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <select class="mdl-textfield__input" id="statut" name="statut" onchange="choixSatut()">
+                    <option></option>
+                    <option value="Client">Client</option>
+                    <option value="Vendeur">Vendeur</option>
+                </select>
+                <label  class="mdl-textfield__label" for="statut">Choisir votre statut</label>
+            </div>
+            <br>
+<!------------------------------------------------------------------------------------------------------------------------------------>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="vendeurTrue" style="visibility: hidden;">
+                <label id="nameEntreprise" style="visibility: hidden;" class="mdl-textfield__label">Nom de l'entreprise :</label>
+                <input pattern="[A-Za-z ]{2,}/*" class="mdl-textfield__input" name="nameEntreprise"  type="text" value="" placeholder="Nom de l'entreprise" >
+            </div>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="vendeurTrue2" style="visibility: hidden;">
+                    <select class="mdl-textfield__input" id="typeEntreprise" name="typeEntreprise"  style="visibility: hidden;">
+                        {% for entreprise in data if data is not empty %}
+                            <option value="{{ entreprise.id_typeEntreprise}}">{{ entreprise.libelle_typeEntreprise}}</option>
+                        {% endfor %}
+                    </select>
+                    <label id="labTypeEntreprise" class="mdl-textfield__label" for="statut" style="visibility: hidden;">Choisir votre type d'entreprise </label>
+                </div>
+            <br>
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="vendeurTrue3" style="visibility: hidden;">
+                <label id="adresseEntreprise" style="visibility: hidden;" class="mdl-textfield__label">Adresse de l'entreprise :</label>
+                <input pattern="[0-9A-Za-z ]{2,}/*" class="mdl-textfield__input" name="adresseEntreprise"  type="text" value="" placeholder="Adresse"  >
+            </div>
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="vendeurTrue4" style="visibility: hidden;">
+                <label id="Siren" style="visibility: hidden;" class="mdl-textfield__label">Siren :</label>
+                <input pattern="\d{9}" class="mdl-textfield__input" name="Siren"  type="text" value="" placeholder="Siren"  >
+            </div>
+
+            <div>
+                <button class="mdl-button mdl-js-button mdl-button--raised mld-button--colored" type="submit">
+                    s'inscrire
+                </button>
+            </div>
+
+        </form>
+
+{% endblock %}
